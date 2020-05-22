@@ -1,0 +1,214 @@
+{% extends 'base.html' %}
+
+{% block title %}Medidores de gás{% endblock %} 
+
+{% block contend %}
+
+<div class="container">
+<!-- imagem logo ifpb -->
+    <div class="row align-items-center">
+        <div class="col-lg">
+            <img src="https://www.imagemhost.com.br/images/2020/05/08/oie_zQtQCFZQDKGO.jpg" 
+            width="500" height="195" class="rounded mx-auto d-block" alt="" >
+        </div>
+    </div>
+
+<p></p>
+
+<!-- css para customizar as tabs -->
+<style>
+    .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
+        background-color: #5784ff;
+        border-color: transparent;
+        border-top-color: transparent;
+        border-top-left-radius: 0rem;
+        border-top-right-radius: 0rem;
+    }
+    .nav-tabs .nav-link:focus, .nav-tabs .nav-link:hover {
+        border-color: #ffffff;
+        border-top-left-radius: 0rem;
+        border-top-right-radius: 0rem;
+    }
+    .nav-tabs .nav-link:focus, .nav-tabs .nav-link:hover {
+        border-color:  #ffffff;
+            /* border-top-color: #f00404;
+            border-right-color: #f00404;
+            border-bottom-color: #f00404;
+            border-left-color: rgb(221, 13, 23); */
+    }
+    </style>
+
+
+<!-- inicio 3 cards    -->
+    <div class="row justify-content-center">
+        <div class="card-deck">
+
+            <div class="card text-center text-body mb-3" style="border-color:#ffb300; border-width: 1px; width: 20rem; background-color: #e4e25e;">
+                <div class="card-header text-white" style="font-size: 22px; background-color: #000000 ;">CO Atual:</div>
+                <ul class="nav nav-tabs nav-fill" role="tablist">
+
+                    <li class="nav-item" style="background-color: #bdb7b7">
+                        <a class="nav-link active" id="ppm-tab" data-toggle="tab" role="tab" href="#co_cardp" style="color:#000000;
+                                                                                                                     font-size: 17px;
+                                                                                                                     font-weight: 300;">PPM</a>
+                    </li>
+                    <li class="nav-item" style="background-color: #bdb7b7">
+                        <a class="nav-link" id="ugm3-tab" data-toggle="tab" role="tab" href="#co_cardu" style="color:#000000;
+                                                                                                               font-size: 17px;                                                                                                                                           font-size: 17px;
+                                                                                                               font-weight: 300;">ug/m³</a>
+                    </li> 
+                </ul>
+                <div class="card-body tab-content">
+                    <div id="co_cardp" class="tab-pane fade show active" role="tabpanel" style="font-size: 26px;
+                                                               font-weight: 500">-</div>
+                    <div id="co_cardu" class="tab-pane fade" role="tabpanel" style="font-size: 26px;
+                                                               font-weight: 500">-</div>
+                </div>
+            </div>
+            
+        
+                    <div class="card text-center text-body mb-3" style="border-color:#ffb300; border-width: 1px; width: 20rem; background-color: #e4e25e;">
+                        <div class="card-header text-white" style="font-size: 22px; background-color: #000000 ;">CO<sub>2</sub> Atual:</div>
+                            <ul class="nav nav-tabs nav-fill" role="tablist">
+                                <li class="nav-item" style="background-color: #bdb7b7;">
+                                    <a class="nav-link active" href="#co2_cardp" role="tab" data-toggle="tab" 
+                                    style="color:#000000; font-size: 17px; font-weight: 300;">PPM</a>
+                                 </li>
+
+                                <li class="nav-item" style="background-color: #bdb7b7;">
+                                    <a class="nav-link" href="#co2_cardu" role="tab" data-toggle="tab" 
+                                    style="color:#000000; font-size: 17px; font-weight: 300;">ug/m³</a>
+                                </li> 
+
+                            </ul>
+                        <div class="card-body tab-content">
+                            <div id="co2_cardp" class="tab-pane fade show active" role="tabpanel" 
+                            style="font-size: 26px; font-weight: 500">-</div>
+                            <div id="co2_cardu" class="tab-pane fade" role="tabpanel" 
+                            style="font-size: 26px;font-weight: 500">-</div>
+                            </div>
+                    </div>
+
+                    <div class="card text-center text-body mb-3" style="border-color:#ffb300; border-width: 1px; width: 20rem; background-color: #e4e25e;">
+                        <div class="card-header text-white" style="font-size: 22px; background-color: #000000 ;">O<sub>3</sub> Atual:</div>
+                        <ul class="nav nav-tabs nav-fill" role="tablist">
+                            <li class="nav-item" style="background-color: #bdb7b7;">
+                                <a class="nav-link active" href="#o3_cardp" role="tab" data-toggle="tab" 
+                                style="color:#000000; font-size: 17px; font-weight: 300;">PPM</a>
+                             </li>
+
+                            <li class="nav-item" style="background-color: #bdb7b7;">
+                                <a class="nav-link" href="#o3_cardu" role="tab" data-toggle="tab" 
+                                style="color:#000000; font-size: 17px; font-weight: 300;">ug/m³</a>
+                            </li> 
+
+                        </ul>
+                    <div class="card-body tab-content">
+                        <div id="o3_cardp" class="tab-pane fade show active" role="tabpanel" 
+                        style="font-size: 26px; font-weight: 500">-</div>
+                        <div id="o3_cardu" class="tab-pane fade" role="tabpanel" 
+                        style="font-size: 26px;font-weight: 500">-</div>
+                        </div>
+                      </div>                
+        </div>
+    </div>
+<!-- fim 3 cards -->
+
+<!-- inicio 2 cards  -->
+    <div class="row justify-content-center"> 
+        <div class="card-deck">
+            
+            <div class="card text-center text-body mb-3" style="border-color:#ffb300; border-width: 1px; width: 30rem; background-color: #e4e25e;">
+                <div class="card-header text-white" style="font-size: 22px; background-color: #000000 ;">NO<sub>2</sub> Atual:</div>
+                <ul class="nav nav-tabs nav-fill" role="tablist">
+                    <li class="nav-item" style="background-color: #bdb7b7;">
+                        <a class="nav-link active" href="#no2_cardp" role="tab" data-toggle="tab" 
+                        style="color:#000000; font-size: 17px; font-weight: 300;">PPM</a>
+                     </li>
+
+                    <li class="nav-item" style="background-color: #bdb7b7;">
+                        <a class="nav-link" href="#no2_cardu" role="tab" data-toggle="tab" 
+                        style="color:#000000; font-size: 17px; font-weight: 300;">ug/m³</a>
+                    </li> 
+
+                </ul>
+            <div class="card-body tab-content">
+                <div id="no2_cardp" class="tab-pane fade show active" role="tabpanel" 
+                style="font-size: 26px; font-weight: 500">-</div>
+                <div id="no2_cardu" class="tab-pane fade" role="tabpanel" 
+                style="font-size: 26px;font-weight: 500">-</div>
+                </div>
+              </div>
+        
+              <div class="card text-center text-body mb-3" style="border-color:#ffb300; border-width: 1px; width: 30rem; background-color: #e4e25e;">
+                <div class="card-header text-white" style="font-size: 22px; background-color: #000000 ;">SO<sub>2</sub> Atual:</div>
+                <ul class="nav nav-tabs nav-fill" role="tablist">
+                    <li class="nav-item" style="background-color: #bdb7b7;">
+                        <a class="nav-link active" href="#so2_cardp" role="tab" data-toggle="tab" 
+                        style="color:#000000; font-size: 17px; font-weight: 300;">PPM</a>
+                     </li>
+
+                    <li class="nav-item" style="background-color: #bdb7b7;">
+                        <a class="nav-link" href="#so2_cardu" role="tab" data-toggle="tab" 
+                        style="color:#000000; font-size: 17px; font-weight: 300;">ug/m³</a>
+                    </li> 
+
+                </ul>
+            <div class="card-body tab-content">
+                <div id="so2_cardp" class="tab-pane fade show active" role="tabpanel" 
+                style="font-size: 26px; font-weight: 500">-</div>
+                <div id="so2_cardu" class="tab-pane fade" role="tabpanel" 
+                style="font-size: 26px;font-weight: 500">-</div>
+                </div>
+              </div>
+                
+        </div>
+    <!-- fim 2 cards -->
+    </div>
+<!-- fim container -->
+</div>
+{% endblock %}
+
+{% block essential %} 
+<!-- carregamento das ferramentas essenciais -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.bundle.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js" integrity="sha256-yr4fRk/GU1ehYJPAs8P4JlTgu0Hdsp4ZKrx8bDEDC3I=" crossorigin="anonymous"></script>
+
+{% endblock %} 
+
+{% block script %}
+<!-- javascript para atualizar os cards -->
+
+<script type="text/javascript"  charset="utf-8"> //padronizando o script
+
+    var socket = io.connect('http://127.0.0.1:8080/');
+    socket.on('atualiza', function(dados) { //altera informação nos cards
+    console.log("ESTADO =",dados);
+    socket.emit('recebi_dados',{data: "received"});
+      if("ppm" in dados)
+        document.getElementById("co_cardp").innerHTML = dados.ppm[0] + " PPM";
+        document.getElementById("co_cardu").innerHTML = dados["ug/m3"][0] + " ug/m³";
+        document.getElementById("co2_cardp").innerHTML = dados.ppm[1] + " PPM";
+        document.getElementById("co2_cardu").innerHTML = dados["ug/m3"][1] + " ug/m³";
+        document.getElementById("o3_cardp").innerHTML = dados.ppm[2] + " PPM";
+        document.getElementById("o3_cardu").innerHTML = dados["ug/m3"][2] + " ug/m³";
+        document.getElementById("no2_cardp").innerHTML = dados.ppm[3] + " PPM";
+        document.getElementById("no2_cardu").innerHTML = dados["ug/m3"][3] + " ug/m³";
+        document.getElementById("so2_cardp").innerHTML = dados.ppm[4] + " PPM";
+        document.getElementById("so2_cardu").innerHTML = dados["ug/m3"][4] + " ug/m³";
+    }
+    );
+    
+    // document.getElementById("card-2").addEventListener("click",
+    // function(){
+        // document.getElementById("co_cardp").removeAttribute("class","active")
+        // document.getElementById("co_cardu").setAttribute("class","active")
+        // })
+
+</script> 
+
+{% endblock %}

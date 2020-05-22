@@ -1,0 +1,595 @@
+{% extends 'base.html' %}
+
+{% block title %} {{"LiveHC!" }} {% endblock %}
+
+{% block contend %}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="container-fluid" id="data-co"></div>
+    </div>
+</div>
+
+<br>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="container-fluid" id="data-co2"></div>
+    </div>
+</div>
+
+<br>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="container-fluid" id="data-o3"></div>
+    </div>
+</div>
+
+<br>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="container-fluid" id="data-no2"></div>
+    </div>
+</div>
+
+<br>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="container-fluid" id="data-so2"></div>
+    </div>
+</div>
+
+{% endblock %}
+
+
+{% block essential %}
+<!-- carregamento das ferramentas essenciais -->
+
+<!-- Bootstraps Java Scipts Links -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js" integrity="sha256-yr4fRk/GU1ehYJPAs8P4JlTgu0Hdsp4ZKrx8bDEDC3I=" crossorigin="anonymous"></script>
+
+<!--High CHART LIVE  -->
+<script src="http://code.highcharts.com/highcharts.js"></script>
+<script src="http://code.highcharts.com/highcharts-more.js"></script>
+<script src="http://code.highcharts.com/modules/exporting.js"></script>
+
+<!-- JQuery links  -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+<!--Gauge  -->
+<script type="text/javascript" src="http://pubnub.github.io/eon/lib/eon.js"></script>
+{% endblock %}
+
+{% block script %}
+
+<script>
+    var chartCO;
+    var chartCO2;
+    var chartO3;
+    var chartNO2;
+    var chartSO2;
+    var pos = 1;
+
+    var socket = io.connect('http://127.0.0.1:8080/'); //conecta ao home page
+
+    socket.on("connect", function(){
+        // --------------Chart CO ----------------------------
+        chartCO = new Highcharts.Chart({
+            chart:
+            {
+                renderTo: 'data-co',
+                defaultSeriesType: 'area',
+                events: {
+                    load: function () {
+                        socket.on("atualiza", function (dados) {
+                            if ("ppm" in dados) {
+                                // CO
+                                var seriesCO = chartCO.series[0],
+                                    shiftCO = seriesCO.data.length > 40;
+                            }
+                            var data1 = [];
+                            data1.push(pos);
+                            data1.push(dados["ppm"][0]);
+                            chartCO.series[0].addPoint(data1, true, shiftCO);
+                        });
+                    },
+                },
+            },
+
+            title:
+            {
+                text: 'Concentração de CO',
+                align: 'center',
+                margin: 12,
+                style: { 
+                    color: '#000000',
+                },
+            },
+            xAxis: {
+                type: 'int',
+                gridLineWidth: 1,
+                gridLineDashStyle:'dash',
+                gridLineColor: '#000000',
+                title:{
+                    text: 'Amostra',
+                    margin: 15,
+                    align: 'middle',
+                    style: {
+                        color:'#000000',
+                    },
+                },
+                labels:{
+                    style:
+                        {
+                        color:'#000000',
+                        fontSize:'11px',
+                        }
+                },
+                lineColor:'black',
+                minTickInterval: 1,
+            },
+            yAxis: {
+                minPadding: 0.2,
+                maxPadding: 0.2,
+                title: {
+                    text: 'PPM',
+                    margin: 15,
+                    align: 'middle',
+                    style: {
+                        color:'#000000',
+                    },
+                },
+                labels:{
+                    style:
+                        {
+                        color:'#000000',
+                        fontSize:'11px',
+                        }
+                },
+                lineColor:'black',
+                gridLineWidth: 2,
+            },
+            plotOptions: {
+                series: {
+                    marker: {
+                        fillColor: '#000000',
+                        lineWidth: 0,
+                        radius:4,
+                        states:{
+                            hover:{
+                                lineWidthPlus:0,
+                                radiusPlus:3,
+                                lineColor:'#000000'
+                            },
+                        }
+                    }
+                },
+            },
+            series: [{
+                color: '#c23d23',
+                lineColor: '#c23d23',
+                name: 'CO',
+                data: []
+            }]
+        });
+
+        // --------------Chart CO2 - -----------------
+
+        chartCO2 = new Highcharts.Chart({
+            chart:
+            {
+                renderTo: 'data-co2',
+                defaultSeriesType: 'area',
+                events: {
+                    load: function () {
+                        socket.on("atualiza", function (dados) {
+                            if ("ppm" in dados) {
+                                // CO2
+                                console.log("DADOS = ", dados);
+                                var seriesCO2 = chartCO2.series[0],
+                                    shiftCO2 = seriesCO2.data.length > 40;
+                            }
+                            var data2 = [];
+                            data2.push(pos);
+                            data2.push(dados["ppm"][1]);
+                            console.log("dados[ppm][1] = ", dados['ppm'][1]);
+                            chartCO2.series[0].addPoint(data2, true, shiftCO2);
+                        });
+                    },
+                },
+            },
+            title:
+            {
+                text: 'Concentração de CO2',
+                align: 'center',
+                margin: 12,
+                style: { 
+                    color: '#000000',
+                },
+            },
+            xAxis: {
+                type: 'int',
+                gridLineWidth: 1,
+                gridLineDashStyle:'dash',
+                gridLineColor: '#000000',
+                title:{
+                    text: 'Amostra',
+                    margin: 15,
+                    align: 'middle',
+                    style: {
+                        color:'#000000',
+                    },
+                },
+                labels:{
+                    style:
+                        {
+                        color:'#000000',
+                        fontSize:'11px',
+                        }
+                },
+                lineColor:'black',
+                minTickInterval: 1,
+
+            },
+            yAxis: {
+                minPadding: 0.2,
+                maxPadding: 0.2,
+                title: {
+                    text: 'PPM',
+                    margin: 15,
+                    align: 'middle',
+                    style: {
+                        color:'#000000',
+                    },
+                },
+                labels:{
+                    style:
+                        {
+                        color:'#000000',
+                        fontSize:'11px',
+                        }
+                },
+                lineColor:'black',
+                gridLineWidth: 2,
+            },
+            plotOptions: {
+                series: {
+                    marker: {
+                        fillColor: '#000000',
+                        lineWidth: 0,
+                        radius:4,
+                        states:{
+                            hover:{
+                                lineWidthPlus:0,
+                                radiusPlus:3,
+                                lineColor:'#000000'
+                            },
+                        }
+                    }
+                },
+            },
+            series: [{
+                lineColor: '#1d82b8',
+                name: 'CO2',
+                data: []
+            }]
+        });
+
+
+// --------------Chart O3 - -----------------
+
+        chartO3 = new Highcharts.Chart({
+            chart:
+            {
+                renderTo: 'data-o3',
+                defaultSeriesType: 'area',
+                events: {
+                    load: function () {
+                        socket.on("atualiza", function (dados) {
+                            if ("ppm" in dados) {
+                                // O3
+                                var seriesO3 = chartO3.series[0],
+                                    shiftO3 = seriesO3.data.length > 40;
+                            }
+                            var data2 = [];
+                            data2.push(pos);
+                            data2.push(dados["ppm"][2]);
+                            chartO3.series[0].addPoint(data2, true, shiftO3);
+                        });
+                    }
+                }
+            },
+            title:
+            {
+                text: 'Concentração de O3',
+                align: 'center',
+                margin: 12,
+                style: { 
+                    color: '#000000',
+                },
+            },
+            xAxis: {
+                type: 'int',
+                gridLineWidth: 1,
+                gridLineDashStyle:'dash',
+                gridLineColor: '#000000',
+                title:{
+                    text: 'Amostra',
+                    margin: 15,
+                    align: 'middle',
+                    style: {
+                        color:'#000000',
+                    },
+                },
+                labels:{
+                    style:
+                        {
+                        color:'#000000',
+                        fontSize:'11px',
+                        }
+                },
+                lineColor:'black',
+                minTickInterval: 1,
+            },
+            yAxis: {
+                minPadding: 0.2,
+                maxPadding: 0.2,
+                title: {
+                    text: 'PPM',
+                    margin: 15,
+                    align: 'middle',
+                    style: {
+                        color:'#000000',
+                    },
+                },
+                labels:{
+                    style:
+                        {
+                        color:'#000000',
+                        fontSize:'11px',
+                        }
+                },
+                lineColor:'black',
+                gridLineWidth: 2,
+            },
+            plotOptions: {
+                series: {
+                    marker: {
+                        fillColor: '#000000',
+                        lineWidth: 0,
+                        radius:4,
+                        states:{
+                            hover:{
+                                lineWidthPlus:0,
+                                radiusPlus:3,
+                                lineColor:'#000000'
+                            },
+                        }
+                    }
+                },
+            },           
+            series: [{
+                color:'#ffff80',
+                lineColor: '#ffff00',
+                name: 'O3',
+                data: []
+            }]
+        });
+
+// --------------Chart NO2 - -----------------
+
+        chartNO2 = new Highcharts.Chart({
+            chart:
+            {
+                renderTo: 'data-no2',
+                defaultSeriesType: 'area',
+                events: {
+                    load: function () {
+                        socket.on("atualiza", function (dados) {
+                            if ("ppm" in dados) {
+                                // NO2
+                                var seriesNO2 = chartNO2.series[0],
+                                    shiftNO2 = seriesNO2.data.length > 40;
+                            }
+                            var data2 = [];
+                            data2.push(pos);
+                            data2.push(dados["ppm"][3]);
+                            chartNO2.series[0].addPoint(data2, true, shiftNO2);
+                        });
+                    }
+                }
+            },
+            title:
+            {
+                text: 'Concentração de NO2',
+                align: 'center',
+                margin: 12,
+                style: { 
+                    color: '#000000',
+                },
+            },
+            xAxis: {
+                type: 'int',
+                gridLineWidth: 1,
+                gridLineDashStyle:'dash',
+                gridLineColor: '#000000',
+                title:{
+                    text: 'Amostra',
+                    margin: 15,
+                    align: 'middle',
+                    style: {
+                        color:'#000000',
+                    },
+                },
+                labels:{
+                    style:
+                        {
+                        color:'#000000',
+                        fontSize:'11px',
+                        }
+                },
+                lineColor:'black',
+                minTickInterval: 1,
+            },
+            yAxis: {
+                minPadding: 0.2,
+                maxPadding: 0.2,
+                title: {
+                    text: 'PPM',
+                    margin: 15,
+                    align: 'middle',
+                    style: {
+                        color:'#000000',
+                    },
+                },
+                labels:{
+                    style:
+                        {
+                        color:'#000000',
+                        fontSize:'11px',
+                        }
+                },
+                lineColor:'black',
+                gridLineWidth: 2,
+            },
+            plotOptions: {
+                series: {
+                    marker: {
+                        fillColor: '#000000',
+                        lineWidth: 0,
+                        radius:4,
+                        states:{
+                            hover:{
+                                lineWidthPlus:0,
+                                radiusPlus:3,
+                                lineColor:'#000000'
+                            },
+                        }
+                    }
+                },
+            },
+            series: [{
+                color: '#90ee90',
+                lineColor: '#00ff00',
+                name: 'NO2',
+                data: []
+            }]
+        });
+
+
+// --------------Chart SO2 - -----------------
+
+        chartSO2 = new Highcharts.Chart({
+            chart:
+            {
+                renderTo: 'data-so2',
+                defaultSeriesType: 'area',
+                events: {
+                    load: function () {
+                        socket.on("atualiza", function (dados) {
+                            if ("ppm" in dados) {
+                                // SO2
+                                var seriesSO2 = chartSO2.series[0],
+                                    shiftSO2 = seriesSO2.data.length > 40;
+                            }
+                            var data2 = [];
+                            data2.push(pos);
+                            data2.push(dados["ppm"][4]);
+                            chartSO2.series[0].addPoint(data2, true, shiftSO2);
+                            pos += 1;
+                        });
+                    }
+                }
+            },
+            title:
+            {
+                text: 'Concentração de SO2',
+                align: 'center',
+                margin: 12,
+                style: { 
+                    color: '#000000',
+                },
+            },
+            xAxis: {
+                type: 'int',
+                gridLineWidth: 1,
+                gridLineDashStyle:'dash',
+                gridLineColor: '#000000',
+                title:{
+                    text: 'Amostra',
+                    margin: 15,
+                    align: 'middle',
+                    style: {
+                        color:'#000000',
+                    },
+                },
+                labels:{
+                    style:
+                        {
+                        color:'#000000',
+                        fontSize:'11px',
+                        }
+                },
+                lineColor:'black',
+                minTickInterval: 1,
+
+             },
+            yAxis: {
+                minPadding: 0.2,
+                maxPadding: 0.2,
+                title: {
+                    text: 'PPM',
+                    margin: 15,
+                    align: 'middle',
+                    style: {
+                        color:'#000000',
+                    },
+                },
+                labels:{
+                    style:
+                        {
+                        color:'#000000',
+                        fontSize:'11px',
+                        }
+                },
+                lineColor:'black',
+                gridLineWidth: 2,
+            },
+            plotOptions: {
+                series: {
+                    marker: {
+                        fillColor: '#000000',
+                        lineWidth: 0,
+                        radius:4,
+                        states:{
+                            hover:{
+                                lineWidthPlus:0,
+                                radiusPlus:3,
+                                lineColor:'#000000'
+                            },
+                        }
+                    }
+                },
+            },
+            series: [{
+                color: '#ffbc40',
+                lineColor: '#ffa500',
+                name: 'SO2',
+                marker:{
+                    fillCollor:'#000000',
+                },
+                data: [],
+            }]
+        });
+    });
+
+</script>
+
+{% endblock %}
