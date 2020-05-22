@@ -15,6 +15,56 @@
   </head>
   
   <body>
+    <style>
+
+      .navbar-dark .navbar-nav .nav-link:hover  {
+	      color: #ffffff;
+        text-decoration: underline white;
+      }
+      .dropdown:hover .dropdown-menu {
+        display: block;
+      }
+      .dropdown-item {
+        display: block;
+        width: 100%;
+          padding-left: 0.25rem;
+          padding-right: 0.5rem;
+          padding-bottom: 0.25rem;
+          padding-top: 0.25rem;
+        clear: both;
+        font-weight: 400;
+        color: #000000;
+        text-align: center;
+        white-space: nowrap;
+        background-color: #ebdfdf;
+        border: 0;
+      }
+      .dropdown-item:hover, .dropdown-item:focus {
+        color: #000000;
+        text-decoration: underline black;
+        background-color: #5784ff;
+      }
+      .dropdown-menu {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        z-index: 1000;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        display: none;
+        float: left;
+        min-width: 5rem;
+        padding: 0rem 0;
+        margin: 0rem 0 0;
+        font-size: 1rem;
+        color: #000000;
+        text-align: left;
+        list-style: none;
+        background-color: #bdb7b7;
+        background-clip: padding-box;
+        border: 1px solid rgba(0,0,0,.15);
+        border-radius: 0rem;
+      }
+    </style>
 
   <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #c71c1c;">
     <a class="navbar-brand" href="home">Inicial</a>
@@ -24,23 +74,39 @@
           <a class="nav-link" href="co">CO</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="co_2">CO2</a>
+          <a class="nav-link" href="co_2">CO<sub>2</sub></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="o3">O3</a>
+          <a class="nav-link" href="o3">O<sub>3</sub></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="no_2">NO2</a>
+          <a class="nav-link" href="no_2">NO<sub>2</sub></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="so_2">SO2</a>
+          <a class="nav-link" href="so_2">SO<sub>2</sub></a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="livehc">LiveHC</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="livejs">LivejS</a>
-        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button"
+           id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" 
+           aria-expanded="false">
+            LiveHc
+          </a>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+          <a class="dropdown-item" href="livehcp">PPM</a>
+          <a class="dropdown-item" href="livehcu">ug/m³</a>
+        </div>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" role="button"
+         id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" 
+         aria-expanded="false">
+          LiveJs
+        </a>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+        <a class="dropdown-item" href="livejsp">PPM</a>
+        <a class="dropdown-item" href="livejsu">ug/m³</a>
+      </div>
+    </li>
       </ul>
     </div>
   </nav>

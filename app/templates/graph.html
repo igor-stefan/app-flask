@@ -32,30 +32,90 @@
         
           <div class="card text-center text-body  mb-3" style="border-color:#161607; border-width: 1px; width: 18rem; background-color: #e4e25e;">
             <div class="card-header text-white" style="font-size: 22px; background-color: #c71c1c ;">Atual:</div>
-                <div class="card-body">
-                    <h3 class="card-text" id = "mom">-</h3>             
-                  </div>
+              <ul class="nav nav-tabs nav-fill" role="tablist">
+                <li class="nav-item" style="background-color: #bdb7b7;">
+                    <a class="nav-link active" href="#momp" role="tab" data-toggle="tab" 
+                    style="color:#000000; font-size: 17px; font-weight: 300;">PPM</a>
+                </li>
+
+                <li class="nav-item" style="background-color: #bdb7b7;">
+                    <a class="nav-link" href="#momu" role="tab" data-toggle="tab" 
+                    style="color:#000000; font-size: 17px; font-weight: 300;">ug/m³</a>
+                </li> 
+
+            </ul>
+             <div class="card-body tab-content">
+              <div id="momp" class="tab-pane fade show active" role="tabpanel" 
+                style="font-size: 26px; font-weight: 500">-</div>
+              <div id="momu" class="tab-pane fade" role="tabpanel" 
+                style="font-size: 26px;font-weight: 500">-</div>
+            </div>
           </div>
                  
           <div class="card text-center text-body mb-3" style="border-color:#ffb300; border-width: 1px; width: 18rem; background-color: #e4e25e;">
             <div class="card-header text-white" style="font-size: 22px; background-color: #000000 ;">Média:</div>
-                <div class="card-body">
-                    <h3 class="card-text" id = "avg">-</h3>             
-                  </div>
+              <ul class="nav nav-tabs nav-fill" role="tablist">
+                <li class="nav-item" style="background-color: #bdb7b7;">
+                    <a class="nav-link active" href="#avgp" role="tab" data-toggle="tab" 
+                    style="color:#000000; font-size: 17px; font-weight: 300;">PPM</a>
+                </li>
+
+                <li class="nav-item" style="background-color: #bdb7b7;">
+                    <a class="nav-link" href="#avgu" role="tab" data-toggle="tab" 
+                    style="color:#000000; font-size: 17px; font-weight: 300;">ug/m³</a>
+                </li> 
+
+            </ul>
+            <div class="card-body tab-content">
+              <div id="avgp" class="tab-pane fade show active" role="tabpanel" 
+                style="font-size: 26px; font-weight: 500">-</div>
+              <div id="avgu" class="tab-pane fade" role="tabpanel" 
+                style="font-size: 26px;font-weight: 500">-</div>
+            </div>
           </div>
          
           <div class="card text-center text-body mb-3" style="border-color:#ffb300; border-width: 1px; width: 18rem; background-color: #e4e25e;">
             <div class="card-header text-white" style="font-size: 22px; background-color: #000000 ;">Máximo:</div>
-                <div class="card-body">
-                    <h3 class="card-text" id = "max">-</h3>             
-                  </div>
+            <ul class="nav nav-tabs nav-fill" role="tablist">
+              <li class="nav-item" style="background-color: #bdb7b7;">
+                  <a class="nav-link active" href="#maxp" role="tab" data-toggle="tab" 
+                  style="color:#000000; font-size: 17px; font-weight: 300;">PPM</a>
+              </li>
+
+              <li class="nav-item" style="background-color: #bdb7b7;">
+                  <a class="nav-link" href="#maxu" role="tab" data-toggle="tab" 
+                  style="color:#000000; font-size: 17px; font-weight: 300;">ug/m³</a>
+              </li> 
+
+          </ul>
+          <div class="card-body tab-content">
+            <div id="maxp" class="tab-pane fade show active" role="tabpanel" 
+              style="font-size: 26px; font-weight: 500">-</div>
+            <div id="maxu" class="tab-pane fade" role="tabpanel" 
+              style="font-size: 26px;font-weight: 500">-</div>
+          </div>
           </div>
         
           <div class="card text-center text-body mb-3" style="border-color:#ffb300; border-width: 1px; width: 18rem; background-color: #e4e25e;">
             <div class="card-header text-white" style="font-size: 22px; background-color: #000000 ;">Mínimo:</div>
-                <div class="card-body">
-                    <h3 class="card-text" id = "min">-</h3>             
-                  </div>
+              <ul class="nav nav-tabs nav-fill" role="tablist">
+                <li class="nav-item" style="background-color: #bdb7b7;">
+                    <a class="nav-link active" href="#minp" role="tab" data-toggle="tab" 
+                    style="color:#000000; font-size: 17px; font-weight: 300;">PPM</a>
+                </li>
+
+                <li class="nav-item" style="background-color: #bdb7b7;">
+                    <a class="nav-link" href="#minu" role="tab" data-toggle="tab" 
+                    style="color:#000000; font-size: 17px; font-weight: 300;">ug/m³</a>
+                </li> 
+
+            </ul>
+            <div class="card-body tab-content">
+              <div id="minp" class="tab-pane fade show active" role="tabpanel" 
+                style="font-size: 26px; font-weight: 500">-</div>
+              <div id="minu" class="tab-pane fade" role="tabpanel" 
+                style="font-size: 26px;font-weight: 500">-</div>
+            </div>
           </div>
         
           </div>
@@ -63,6 +123,29 @@
     </div>
 
     </div>
+
+    <style>
+    .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
+        background-color: #5784ff;
+        border-color: transparent;
+        border-top-color: transparent;
+        border-top-left-radius: 0rem;
+        border-top-right-radius: 0rem;
+    }
+    .nav-tabs .nav-link:focus, .nav-tabs .nav-link:hover {
+        border-color: #ffffff;
+        border-top-left-radius: 0rem;
+        border-top-right-radius: 0rem;
+    }
+    .nav-tabs .nav-link:focus, .nav-tabs .nav-link:hover {
+        border-color:  #ffffff;
+            /* border-top-color: #f00404;
+            border-right-color: #f00404;
+            border-bottom-color: #f00404;
+            border-left-color: rgb(221, 13, 23); */
+    }
+
+    </style>
   
 {% endblock %}
 
@@ -158,6 +241,10 @@
     var maior = -1.0;
     var menor = 1000000.0;
     var max_length = 41;
+    var acum_u = 0.0;
+    var atual_u = 0.0;
+    var maior_u = 0.0;
+    var menor_u = 0.0;
     var labels_place = config.data.labels;
     var pos = 1
 
@@ -179,20 +266,28 @@
                 }
 
                 acum += dados['ppm']["{{ind|int}}"]; //acumulador 0 + valor em ppm
+                acum_u += dados['ug/m3']["{{ind|int}}"];
                 //alterando valores nas caixas de amostragem
-                document.getElementById("avg").innerHTML = ((acum/(pos)).toPrecision(7)) + " PPM" ;
-                atual=dados['ppm']["{{ind|int}}"]
+                document.getElementById("avgp").innerHTML = ((acum/(pos)).toPrecision(7)) + " PPM" ;
+                document.getElementById("avgu").innerHTML = ((acum_u/(pos)).toPrecision(7)) + " ug/m³" ;
+                
+                atual = dados['ppm']["{{ind|int}}"]
+                atual_u = dados['ug/m3']["{{ind|int}}"]
                 pos += 1;
 
-                document.getElementById("mom").innerHTML = atual.toPrecision(7) + " PPM" ;
+                document.getElementById("momp").innerHTML = atual.toPrecision(7) + " PPM" ;
+                document.getElementById("momu").innerHTML = atual_u.toPrecision(7) + " ug/m³" ;
                 if(dados['ppm']["{{ind|int}}"] < menor){
                     menor = dados['ppm']["{{ind|int}}"]
-                    document.getElementById("min").innerHTML = menor.toPrecision(7) + " PPM" ;
+                    menor_u = dados['ug/m3']["{{ind|int}}"]
+                    document.getElementById("minp").innerHTML = menor.toPrecision(7) + " PPM" ;
+                    document.getElementById("minu").innerHTML = menor_u.toPrecision(7) + " ug/m³" ;
                 }
                 if(dados['ppm']["{{ind|int}}"] > maior){
                     maior = dados['ppm']["{{ind|int}}"];
-                    console.log("MAIOR =",maior.toPrecision(7));
-                    document.getElementById("max").innerHTML = maior.toPrecision(7) + " PPM" ;
+                    maior_u = dados["ug/m3"]["{{ind|int}}"];
+                    document.getElementById("maxp").innerHTML = maior.toPrecision(7) + " PPM" ;
+                    document.getElementById("maxu").innerHTML = maior_u.toPrecision(7) + " ug/m³" ;
                 }
             },
     );

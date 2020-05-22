@@ -1,0 +1,507 @@
+{% extends 'base.html' %}
+
+{% block title %} {{"LiveJs!" }} {% endblock %} 
+
+{% block contend %} 
+<div class="container-fluid">
+  
+  <div class="row justify-content-center">
+      <div class="col sm-9 align-content-center">
+          <center>
+            <div class="chart-container" style="position: relative; width: 1300px; height: 300px;">
+                <canvas id="myChart"></canvas>
+            </div>
+          </center>
+      </div>
+  </div>
+
+<br><br>
+   
+<div class="row justify-content-center">
+  <div class="col sm-9 align-content-center">
+      <center>
+        <div class="chart-container" style="position: relative; width: 1300px; height: 300px;">
+            <canvas id="myChart1"></canvas>
+        </div>
+      </center>
+  </div>
+</div>
+
+<br><br>
+
+<div class="row justify-content-center">
+  <div class="col sm-9 align-content-center">
+      <center>
+        <div class="chart-container" style="position: relative; width: 1300px; height: 300px;">
+            <canvas id="myChart2"></canvas>
+        </div>
+      </center>
+  </div>
+</div>
+
+<br><br>
+
+<div class="row justify-content-center">
+  <div class="col sm-9 align-content-center">
+      <center>
+        <div class="chart-container" style="position: relative; width: 1300px; height: 300px;">
+            <canvas id="myChart3"></canvas>
+        </div>
+      </center>
+  </div>
+</div>
+
+<br><br>
+
+<div class="row justify-content-center">
+  <div class="col sm-9 align-content-center">
+      <center>
+        <div class="chart-container" style="position: relative; width: 1300px; height: 300px;">
+            <canvas id="myChart4"></canvas>
+        </div>
+      </center>
+  </div>
+</div>
+
+<br><br>
+
+<center>
+  <button id="stopButton" type="button" 
+  class="btn btn-outline-success">Pausar</button>
+</center>
+
+<br>
+
+</div>
+  
+{% endblock %}
+
+{% block essential %} 
+<!-- carregamento das ferramentas essenciais -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.bundle.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js" integrity="sha256-yr4fRk/GU1ehYJPAs8P4JlTgu0Hdsp4ZKrx8bDEDC3I=" crossorigin="anonymous"></script>
+{% endblock %} 
+
+
+{% block script %}
+<script type="text/javascript" charset="utf-8" > 
+
+var dt = {
+  0:[],
+  1:[],
+  2:[],
+  3:[],
+  4:[]
+};
+
+var config = {
+  0:{
+  type: 'line', //tipo
+  data: {
+    labels: [], //vetor labels 
+    datasets: [{ //local onde aparecem os dados
+      label: 'Concentração de CO', //titulo
+      data: dt[0],  //vetor com os dados
+      backgroundColor: [ //cor do plano de fundo
+      'rgba(194,61,35,0.65)',
+      ],
+      borderColor: [ //cor da borda
+      'rgba(0,0,0)'
+      ],
+      borderWidth: '2',  //largura da borda
+      pointBackgroundColor: 'rgba( 194,61,35,0.9)',
+      pointBorderColor: 'rgba(0,0,0)',
+      pointBorderWidth: 2,
+    }]
+  },
+  options: { //configuração da "atuação do grafico"
+    responsive: true, //se permite alterações na dimensão do gráfico
+    maintainAspectRatio: false,
+    hover: {
+      mode: 'nearest', //Gets the items that are at the nearest distance to the point
+      intersect: true //if true, the hover mode only applies 
+    },               //when the mouse position intersects an item on the chart.
+    scales: { //opçoes para graficos variaveis
+      xAxes: [{ //eixo x
+        display: true, //se deve ser apresentado
+        scaleLabel: { //legenda do eixo
+          display: true, 
+          labelString:'Amostra',
+          fontColor: 'black',   //Fonte da legenda
+          fontSize: '14'
+        },
+        ticks: {
+                fontColor: 'black',  //Fonte dos valores de x
+                fontSize:'11'
+            },
+      }],
+      yAxes: [{
+        display: true,
+        scaleLabel: {
+          display: true,
+          labelString:'ug/m³',
+          fontColor: 'black',
+          fontSize: '14'          //Fonte da legenda
+        },
+        ticks: {
+                fontColor: 'black', //Fonte dos valores de y
+                fontSize:'11'
+            },
+      }]
+    },
+    title: { //titulo do grafico
+      display: true,
+      text:'MQ7',
+      fontSize:'14',
+    },
+    legend: {
+      labels: {
+        fontColor: 'black'
+      }
+    },
+  }
+},
+1:{
+    type: 'line', //tipo
+  data: {
+    labels: [], //vetor labels 
+    datasets: [{ //local onde aparecem os dados
+      label: 'Concentração de CO2', //titulo
+      data: dt[1],  //vetor com os dados
+      backgroundColor: [ //cor do plano de fundo
+      'rgba(29,130,184,0.65)'
+      ],
+      borderColor: [ //cor da borda
+      'rgba(0,0,0)'
+      ],
+      borderWidth: '2',  //largura da borda
+      pointBackgroundColor: 'rgba(29,130,184,0.9)',
+      pointBorderColor: 'rgba(0,0,0)',
+      pointBorderWidth: 2,
+    }]
+  },
+  options: { //configuração da "atuação do grafico"
+    responsive: true, //se permite alterações na dimensão do gráfico
+    maintainAspectRatio: false,
+    hover: {
+      mode: 'nearest', //Gets the items that are at the nearest distance to the point
+      intersect: true //if true, the hover mode only applies 
+    },               //when the mouse position intersects an item on the chart.
+    scales: { //opçoes para graficos variaveis
+      xAxes: [{ //eixo x
+        display: true, //se deve ser apresentado
+        scaleLabel: { //legenda do eixo
+          display: true, 
+          labelString:'Amostra',
+          fontColor: 'black',   //Fonte da legenda
+          fontSize: '14'
+        },
+        ticks: {
+                fontColor: 'black',  //Fonte dos valores de x
+                fontSize:'11'
+            },
+      }],
+      yAxes: [{
+        display: true,
+        scaleLabel: {
+          display: true,
+          labelString:'ug/m³',
+          fontColor: 'black',
+          fontSize: '14'          //Fonte da legenda
+        },
+        ticks: {
+                fontColor: 'black', //Fonte dos valores de y
+                fontSize:'11'
+            },
+      }]
+    },
+    title: { //titulo do grafico
+      display: true,
+      text:'MQ135',
+      fontSize:'14',
+    },
+    legend: {
+      labels: {
+        fontColor: 'black'
+      }
+    },
+  },
+},
+  2:{
+    type: 'line', //tipo
+  data: {
+    labels: [], //vetor labels 
+    datasets: [{ //local onde aparecem os dados
+      label: 'Concentração de O3', //titulo
+      data: dt[2],  //vetor com os dados
+      backgroundColor: [ //cor do plano de fundo
+      'rgba(255,255,128, 0.7)'
+      ],
+      borderColor: [ //cor da borda
+      'rgba(0,0,0)'
+      ],
+      borderWidth: '2',  //largura da borda
+      pointBackgroundColor: 'rgba(255,255,128, 0.9)',
+      pointBorderColor: 'rgba(0,0,0)',
+      pointBorderWidth: 2,
+    }]
+  },
+  options: { //configuração da "atuação do grafico"
+    responsive: true, //se permite alterações na dimensão do gráfico
+    maintainAspectRatio: false,
+    hover: {
+      mode: 'nearest', //Gets the items that are at the nearest distance to the point
+      intersect: true //if true, the hover mode only applies 
+    },               //when the mouse position intersects an item on the chart.
+    scales: { //opçoes para graficos variaveis
+      xAxes: [{ //eixo x
+        display: true, //se deve ser apresentado
+        scaleLabel: { //legenda do eixo
+          display: true, 
+          labelString:'Amostra',
+          fontColor: 'black',   //Fonte da legenda
+          fontSize: '14'
+        },
+        ticks: {
+                fontColor: 'black',  //Fonte dos valores de x
+                fontSize:'11'
+            },
+      }],
+      yAxes: [{
+        display: true,
+        scaleLabel: {
+          display: true,
+          labelString:'ug/m³',
+          fontColor: 'black',
+          fontSize: '14'          //Fonte da legenda
+        },
+        ticks: {
+                fontColor: 'black', //Fonte dos valores de y
+                fontSize:'11'
+            },
+      }]
+    },
+    title: { //titulo do grafico
+      display: true,
+      text:'MQ131',
+      fontSize:'14',
+    },
+    legend: {
+      labels: {
+        fontColor: 'black'
+      }
+    },
+  }
+  },
+  3:{
+    type: 'line', //tipo
+  data: {
+    labels: [], //vetor labels 
+    datasets: [{ //local onde aparecem os dados
+      label: 'Concentração de NO2', //titulo
+      data: dt[3],  //vetor com os dados
+      backgroundColor: [ //cor do plano de fundo
+      'rgba(144,238,144, 0.7)'
+      ],
+      borderColor: [ //cor da borda
+      'rgba(0,0,0)'
+      ],
+      borderWidth: '2',  //largura da borda
+      pointBackgroundColor: 'rgba(144,238,144, 0.9)',
+      pointBorderColor: 'rgba(0,0,0)',
+      pointBorderWidth: 2,
+    }]
+  },
+  options: { //configuração da "atuação do grafico"
+    responsive: true, //se permite alterações na dimensão do gráfico
+    maintainAspectRatio: false,
+    hover: {
+      mode: 'nearest', //Gets the items that are at the nearest distance to the point
+      intersect: true //if true, the hover mode only applies 
+    },               //when the mouse position intersects an item on the chart.
+    scales: { //opçoes para graficos variaveis
+      xAxes: [{ //eixo x
+        display: true, //se deve ser apresentado
+        scaleLabel: { //legenda do eixo
+          display: true, 
+          labelString:'Amostra',
+          fontColor: 'black',   //Fonte da legenda
+          fontSize: '14'
+        },
+        ticks: {
+                fontColor: 'black',  //Fonte dos valores de x
+                fontSize:'11'
+            },
+      }],
+      yAxes: [{
+        display: true,
+        scaleLabel: {
+          display: true,
+          labelString:'ug/m³',
+          fontColor: 'black',
+          fontSize: '14'          //Fonte da legenda
+        },
+        ticks: {
+                fontColor: 'black', //Fonte dos valores de y
+                fontSize:'11'
+            },
+      }]
+    },
+    title: { //titulo do grafico
+      display: true,
+      text:'MICS6814',
+      fontSize:'14',
+    },
+    legend: {
+      labels: {
+        fontColor: 'black'
+      }
+    },
+  }
+  },
+4:{
+  type: 'line', //tipo
+  data: {
+    labels: [], //vetor labels 
+    datasets: [{ //local onde aparecem os dados
+      label: 'Concentração de SO2', //titulo
+      data: dt[4],  //vetor com os dados
+      backgroundColor: [ //cor do plano de fundo
+      'rgba(255,188,64, 0.7)'
+      ],
+      borderColor: [ //cor da borda
+      'rgba(0,0,0)'
+      ],
+      borderWidth: '2',  //largura da borda
+      pointBackgroundColor: 'rgba(255,188,64, 0.9)',
+      pointBorderColor: 'rgba(0,0,0)',
+      pointBorderWidth: 2,
+    }]
+  },
+  options: { //configuração da "atuação do grafico"
+    responsive: true, //se permite alterações na dimensão do gráfico
+    maintainAspectRatio: false,
+    hover: {
+      mode: 'nearest', //Gets the items that are at the nearest distance to the point
+      intersect: true //if true, the hover mode only applies 
+    },               //when the mouse position intersects an item on the chart.
+    scales: { //opçoes para graficos variaveis
+      xAxes: [{ //eixo x
+        display: true, //se deve ser apresentado
+        scaleLabel: { //legenda do eixo
+          display: true, 
+          labelString:'Amostra',
+          fontColor: 'black',   //Fonte da legenda
+          fontSize: '14'
+        },
+        ticks: {
+                fontColor: 'black',  //Fonte dos valores de x
+                fontSize:'11'
+            },
+      }],
+      yAxes: [{
+        display: true,
+        scaleLabel: {
+          display: true,
+          labelString:'ug/m³',
+          fontColor: 'black',
+          fontSize: '14'          //Fonte da legenda
+        },
+        ticks: {
+                fontColor: 'black', //Fonte dos valores de y
+                fontSize:'11'
+            },
+      }]
+    },
+    title: { //titulo do grafico
+      display: true,
+      text:'2SH12',
+      fontSize:'14',
+    },
+    legend: {
+      labels: {
+        fontColor: 'black'
+      }
+    },
+  }
+},
+}
+
+var ctx = {
+  0:document.getElementById("myChart").getContext('2d'),
+  1:document.getElementById("myChart1").getContext('2d'),
+  2:document.getElementById("myChart2").getContext('2d'),
+  3:document.getElementById("myChart3").getContext('2d'),
+  4:document.getElementById("myChart4").getContext('2d'),
+}
+var myChart = {
+  0:new Chart(ctx[0], config[0]),
+  1:new Chart(ctx[1], config[1]),
+  2:new Chart(ctx[2], config[2]),
+  3:new Chart(ctx[3], config[3]),
+  4:new Chart(ctx[4], config[4]),
+}; //definição da variavel do grafico contexto, configurações
+Chart.defaults.global.defaultFontFamily = "Arial";
+Chart.defaults.global.elements.line.cubicInterpolationMode = 'monotone';
+
+var max_length = 41;
+
+var labels_place = 
+{
+  0:config[0].data.labels,
+  1:config[1].data.labels,
+  2:config[2].data.labels,
+  3:config[3].data.labels,
+  4:config[4].data.labels,
+
+}
+var pos = 1
+
+
+var socket = io.connect('http://127.0.0.1:8080/'); //conecta ao home page
+socket.on("atualiza", 
+    function(dados) { //dados json passado por socketio.emit("atualiza",estado)
+    i=0; 
+    console.log("Dados = ",dados)  
+      if("ug/m3" in dados){
+        for(i=0;i<5;i++){
+            dt[i].push(dados["ug/m3"][i]);  //adiciona o valor da chave no vetor dt
+            labels_place[i].push(pos.toString()); //adiciona ao vetor labels
+            if(dt[i].length>max_length){ //testa se há muitos valores
+                dt[i].shift();           //remove o primeiro item do vetor; shift()
+                labels_place[i].shift();
+            } 
+        }
+        pos+=1;
+      }
+            if(isRunning){
+              for(i=0;i<5;i++){                                  //o valor de pos
+                window.myChart[i].update();                    //ficando igual a 0s...1"{{ index }}"s...
+              }
+          }
+        },
+);
+//sobre o clique no botão "Pausar"
+document.getElementById("stopButton").addEventListener("click", stopUpdating);
+
+var isRunning = true; //variavel de controle
+
+function stopUpdating(){ //funcao
+      isRunning = !isRunning; //inverte o valor atual da variavel
+      if(isRunning){ //se estiver rodando o programa
+        document.getElementById("stopButton").textContent = "Pausar";
+        socket.emit('get_back')
+      } //altera o texto para "Pausar"
+      else{ //se não estiver
+        socket.emit('stop',{"situation": "stop the thread"});
+        document.getElementById("stopButton").textContent = "Retomar";
+      } //altera o texto para "Retomar"
+    }
+
+</script>
+
+
+{% endblock %}

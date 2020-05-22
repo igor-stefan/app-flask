@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block title %} {{"LiveHC!" }} {% endblock %}
+{% block title %} {{"LiveHc!" }} {% endblock %}
 
 {% block contend %}
 
@@ -49,7 +49,6 @@
 <!-- carregamento das ferramentas essenciais -->
 
 <!-- Bootstraps Java Scipts Links -->
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
@@ -89,14 +88,14 @@
                 events: {
                     load: function () {
                         socket.on("atualiza", function (dados) {
-                            if ("ppm" in dados) {
+                            if ("ug/m3" in dados) {
                                 // CO
                                 var seriesCO = chartCO.series[0],
                                     shiftCO = seriesCO.data.length > 40;
                             }
                             var data1 = [];
                             data1.push(pos);
-                            data1.push(dados["ppm"][0]);
+                            data1.push(dados["ug/m3"][0]);
                             chartCO.series[0].addPoint(data1, true, shiftCO);
                         });
                     },
@@ -129,7 +128,7 @@
                     style:
                         {
                         color:'#000000',
-                        fontSize:'11px',
+                        fontSize:'12px',
                         }
                 },
                 lineColor:'black',
@@ -139,7 +138,7 @@
                 minPadding: 0.2,
                 maxPadding: 0.2,
                 title: {
-                    text: 'PPM',
+                    text: 'ug/m³',
                     margin: 15,
                     align: 'middle',
                     style: {
@@ -150,7 +149,7 @@
                     style:
                         {
                         color:'#000000',
-                        fontSize:'11px',
+                        fontSize:'12px',
                         }
                 },
                 lineColor:'black',
@@ -190,7 +189,7 @@
                 events: {
                     load: function () {
                         socket.on("atualiza", function (dados) {
-                            if ("ppm" in dados) {
+                            if ("ug/m3" in dados) {
                                 // CO2
                                 console.log("DADOS = ", dados);
                                 var seriesCO2 = chartCO2.series[0],
@@ -198,8 +197,7 @@
                             }
                             var data2 = [];
                             data2.push(pos);
-                            data2.push(dados["ppm"][1]);
-                            console.log("dados[ppm][1] = ", dados['ppm'][1]);
+                            data2.push(dados["ug/m3"][1]);
                             chartCO2.series[0].addPoint(data2, true, shiftCO2);
                         });
                     },
@@ -231,7 +229,7 @@
                     style:
                         {
                         color:'#000000',
-                        fontSize:'11px',
+                        fontSize:'12px',
                         }
                 },
                 lineColor:'black',
@@ -242,7 +240,7 @@
                 minPadding: 0.2,
                 maxPadding: 0.2,
                 title: {
-                    text: 'PPM',
+                    text: 'ug/m³',
                     margin: 15,
                     align: 'middle',
                     style: {
@@ -253,7 +251,7 @@
                     style:
                         {
                         color:'#000000',
-                        fontSize:'11px',
+                        fontSize:'12px',
                         }
                 },
                 lineColor:'black',
@@ -293,14 +291,14 @@
                 events: {
                     load: function () {
                         socket.on("atualiza", function (dados) {
-                            if ("ppm" in dados) {
+                            if ("ug/m3" in dados) {
                                 // O3
                                 var seriesO3 = chartO3.series[0],
                                     shiftO3 = seriesO3.data.length > 40;
                             }
                             var data2 = [];
                             data2.push(pos);
-                            data2.push(dados["ppm"][2]);
+                            data2.push(dados["ug/m3"][2]);
                             chartO3.series[0].addPoint(data2, true, shiftO3);
                         });
                     }
@@ -332,7 +330,7 @@
                     style:
                         {
                         color:'#000000',
-                        fontSize:'11px',
+                        fontSize:'12px',
                         }
                 },
                 lineColor:'black',
@@ -342,7 +340,7 @@
                 minPadding: 0.2,
                 maxPadding: 0.2,
                 title: {
-                    text: 'PPM',
+                    text: 'ug/m³',
                     margin: 15,
                     align: 'middle',
                     style: {
@@ -353,7 +351,7 @@
                     style:
                         {
                         color:'#000000',
-                        fontSize:'11px',
+                        fontSize:'12px',
                         }
                 },
                 lineColor:'black',
@@ -393,14 +391,14 @@
                 events: {
                     load: function () {
                         socket.on("atualiza", function (dados) {
-                            if ("ppm" in dados) {
+                            if ("ug/m3" in dados) {
                                 // NO2
                                 var seriesNO2 = chartNO2.series[0],
                                     shiftNO2 = seriesNO2.data.length > 40;
                             }
                             var data2 = [];
                             data2.push(pos);
-                            data2.push(dados["ppm"][3]);
+                            data2.push(dados["ug/m3"][3]);
                             chartNO2.series[0].addPoint(data2, true, shiftNO2);
                         });
                     }
@@ -432,7 +430,7 @@
                     style:
                         {
                         color:'#000000',
-                        fontSize:'11px',
+                        fontSize:'12px',
                         }
                 },
                 lineColor:'black',
@@ -442,7 +440,7 @@
                 minPadding: 0.2,
                 maxPadding: 0.2,
                 title: {
-                    text: 'PPM',
+                    text: 'ug/m³',
                     margin: 15,
                     align: 'middle',
                     style: {
@@ -453,7 +451,7 @@
                     style:
                         {
                         color:'#000000',
-                        fontSize:'11px',
+                        fontSize:'12px',
                         }
                 },
                 lineColor:'black',
@@ -494,14 +492,14 @@
                 events: {
                     load: function () {
                         socket.on("atualiza", function (dados) {
-                            if ("ppm" in dados) {
+                            if ("ug/m3" in dados) {
                                 // SO2
                                 var seriesSO2 = chartSO2.series[0],
                                     shiftSO2 = seriesSO2.data.length > 40;
                             }
                             var data2 = [];
                             data2.push(pos);
-                            data2.push(dados["ppm"][4]);
+                            data2.push(dados["ug/m3"][4]);
                             chartSO2.series[0].addPoint(data2, true, shiftSO2);
                             pos += 1;
                         });
@@ -534,7 +532,7 @@
                     style:
                         {
                         color:'#000000',
-                        fontSize:'11px',
+                        fontSize:'12px',
                         }
                 },
                 lineColor:'black',
@@ -545,7 +543,7 @@
                 minPadding: 0.2,
                 maxPadding: 0.2,
                 title: {
-                    text: 'PPM',
+                    text: 'ug/m³',
                     margin: 15,
                     align: 'middle',
                     style: {
@@ -556,7 +554,7 @@
                     style:
                         {
                         color:'#000000',
-                        fontSize:'11px',
+                        fontSize:'12px',
                         }
                 },
                 lineColor:'black',

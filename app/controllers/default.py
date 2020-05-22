@@ -56,10 +56,18 @@ def gas_so2():
     return render_template('graph.html',mygas='SO2',
                             sensor = '2SH12', ind=4)
 
-@app.route("/livehc")
-def live_all():
-    return render_template('livehc.html')
+@app.route("/livehcp")
+def live_hcp():
+    return render_template('livehcp.html')
 
-@app.route("/livejs")
-def live_js():
-    return render_template('livejs.html')
+@app.route("/livehcu")
+def live_hcu():
+    return render_template('livehcu.html')
+
+@app.route("/livejsp")
+def live_jsp():
+    return render_template('livejsp.html')
+
+@app.route("/livejsu")
+def live_jsu():
+    return render_template('livejsu.html')

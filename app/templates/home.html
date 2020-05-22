@@ -8,14 +8,14 @@
 <!-- imagem logo ifpb -->
     <div class="row align-items-center">
         <div class="col-lg">
-            <img src="https://www.imagemhost.com.br/images/2020/05/08/oie_zQtQCFZQDKGO.jpg" 
-            width="500" height="195" class="rounded mx-auto d-block" alt="" >
+           <a href=http://www.ifpb.edu.br/><img src="https://www.imagemhost.com.br/images/2020/05/08/oie_zQtQCFZQDKGO.jpg" 
+            width="500" height="195" class="rounded mx-auto d-block" alt=""></a>
         </div>
     </div>
 
 <p></p>
 
-<!-- css para customizar as tabs -->
+<!-- css de leve -->
 <style>
     .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
         background-color: #5784ff;
@@ -187,7 +187,7 @@
 
     var socket = io.connect('http://127.0.0.1:8080/');
     socket.on('atualiza', function(dados) { //altera informação nos cards
-    console.log("ESTADO =",dados);
+    console.log("DADOS =",dados);
     socket.emit('recebi_dados',{data: "received"});
       if("ppm" in dados)
         document.getElementById("co_cardp").innerHTML = dados.ppm[0] + " PPM";
