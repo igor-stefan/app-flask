@@ -268,26 +268,26 @@
                 acum += dados['ppm']["{{ind|int}}"]; //acumulador 0 + valor em ppm
                 acum_u += dados['ug/m3']["{{ind|int}}"];
                 //alterando valores nas caixas de amostragem
-                document.getElementById("avgp").innerHTML = ((acum/(pos)).toPrecision(7)) + " PPM" ;
-                document.getElementById("avgu").innerHTML = ((acum_u/(pos)).toPrecision(7)) + " ug/m³" ;
+                document.getElementById("avgp").innerHTML = ((acum/(pos)).toPrecision(4)) + " PPM" ;
+                document.getElementById("avgu").innerHTML = ((acum_u/(pos)).toPrecision(4)) + " ug/m³" ;
                 
                 atual = dados['ppm']["{{ind|int}}"]
                 atual_u = dados['ug/m3']["{{ind|int}}"]
                 pos += 1;
 
-                document.getElementById("momp").innerHTML = atual.toPrecision(7) + " PPM" ;
-                document.getElementById("momu").innerHTML = atual_u.toPrecision(7) + " ug/m³" ;
+                document.getElementById("momp").innerHTML = atual.toPrecision(4) + " PPM" ;
+                document.getElementById("momu").innerHTML = atual_u.toPrecision(4) + " ug/m³" ;
                 if(dados['ppm']["{{ind|int}}"] < menor){
                     menor = dados['ppm']["{{ind|int}}"]
                     menor_u = dados['ug/m3']["{{ind|int}}"]
-                    document.getElementById("minp").innerHTML = menor.toPrecision(7) + " PPM" ;
-                    document.getElementById("minu").innerHTML = menor_u.toPrecision(7) + " ug/m³" ;
+                    document.getElementById("minp").innerHTML = menor.toPrecision(4) + " PPM" ;
+                    document.getElementById("minu").innerHTML = menor_u.toPrecision(4) + " ug/m³" ;
                 }
                 if(dados['ppm']["{{ind|int}}"] > maior){
                     maior = dados['ppm']["{{ind|int}}"];
                     maior_u = dados["ug/m3"]["{{ind|int}}"];
-                    document.getElementById("maxp").innerHTML = maior.toPrecision(7) + " PPM" ;
-                    document.getElementById("maxu").innerHTML = maior_u.toPrecision(7) + " ug/m³" ;
+                    document.getElementById("maxp").innerHTML = maior.toPrecision(4) + " PPM" ;
+                    document.getElementById("maxu").innerHTML = maior_u.toPrecision(4) + " ug/m³" ;
                 }
             },
     );

@@ -21,8 +21,8 @@ def take_string(n): #leitura da serial
     while cond!=True:
         while True:
             data=n.readline().decode('utf-8').strip('\r\n')
-            if(data)=="{":
-                mystring=data
+            if(data)=="{": #procura o caractere "{"
+                mystring=data 
                 break
         while(i<17):
                 mystring+=n.readline().decode('utf-8').strip('\r\n')
